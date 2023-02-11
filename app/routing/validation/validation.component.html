@@ -1,0 +1,95 @@
+<div class="w-50 container m-auto text-center alert alert-dark mt-5">
+  <div class="row mt-5">
+    <form [formGroup]="myRegisterationForm">
+      <div class="form-group">
+        <div class="d-flex">
+          <label class="col-4 form-label">Name</label>
+
+          <input
+            #name
+            formControlName="name"
+            type="text"
+            class="form-control w-50 text-center"
+            placeholder="please Type your name"
+            required
+          />
+        </div>
+        <div
+          class="text-center"
+          style="color: red"
+          *ngIf="!name.value; else trueBlock"
+        >
+          Name is required
+        </div>
+        <div
+          class="text-center"
+          style="color: red"
+          *ngIf="!NameValid; else trueBlock"
+        >
+          Name characters should be more than 3
+        </div>
+        <ng-template #trueBlock>
+          <div *ngIf="NameValid" style="color: green">Data True</div>
+        </ng-template>
+      </div>
+
+      <div class="form-group">
+        <div class="d-flex mt-3">
+          <label class="col-4 form-label">Age</label>
+
+          <input
+            #age
+            formControlName="age"
+            type="number"
+            class="form-control w-50 text-center"
+            placeholder="please Type your age"
+          />
+        </div>
+
+        <div style="color: red" *ngIf="!AgeValid && NameValid; else trueBlock2">
+          Age should be between 20-40
+        </div>
+        <ng-template #trueBlock2>
+          <div *ngIf="AgeValid && age.value" style="color: green">
+            Data True
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="form-group">
+        <div class="d-flex mt-3">
+          <label class="col-4 form-label">Email</label>
+
+          <input
+            #email
+            formControlName="email"
+            type="email"
+            class="form-control w-50 text-center"
+            placeholder="please Type your email"
+          />
+        </div>
+        <div
+          style="color: red"
+          *ngIf="!EmailValid && NameValid && AgeValid; else trueBlock3"
+        >
+          Email should be Example@mail.com
+        </div>
+        <ng-template #trueBlock3>
+          <div *ngIf="AgeValid && email.value" style="color: green">
+            Data True
+          </div>
+        </ng-template>
+      </div>
+      <br />
+      <br />
+      <div class="form-group d-flex justify-content-center mt-3">
+        <input
+          type="submit"
+          (click)="Add()"
+          class="btn btn-dark col-5"
+          value="ADD"
+        />
+      </div>
+    </form>
+  </div>
+</div>
